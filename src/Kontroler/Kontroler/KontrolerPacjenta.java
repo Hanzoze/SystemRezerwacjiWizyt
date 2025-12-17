@@ -23,15 +23,10 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
 
         RezerwacjaWizyty proces = new RezerwacjaWizyty(model);
 
-        int wybranyTerminId = 1; // przekazywane z Widoku
+        int wybranyTerminId = 1;
         proces.rozpoczecieRezerwacji(wybranyTerminId);
 
-        IDaneOsobowe dane = new DaneOsobowe();
-        dane.setImie("Jan");
-        dane.setNazwisko("Kowalski");
-        dane.setPesel("90101055555");
-        dane.setEmail("jan.kowalski@test.pl");
-        dane.setNumerTelefonu("500600700");
+        IDaneOsobowe dane = podanieDanychDoRezerwacji();
 
         proces.pobierzDaneOsobowe(dane);
     }
@@ -48,8 +43,17 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
     }
 
     @Override
-    public void podanieDanychDoRezerwacji() {
-        // dane przekazywane z Widoku – logika w RezerwacjaWizyty
+    public IDaneOsobowe podanieDanychDoRezerwacji() {
+
+        IDaneOsobowe dane = new DaneOsobowe();
+        dane.setImie("Jan");
+        dane.setNazwisko("Kowalski");
+        dane.setPesel("90101055555");
+        dane.setEmail("jan.kowalski@test.pl");
+        dane.setNumerTelefonu("500600700");
+
+        System.out.println("KONTROLER PACJENTA: Użytkownik wprowadził dane w formularzu.");
+        return dane;
     }
 
     @Override
