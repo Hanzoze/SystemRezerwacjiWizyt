@@ -4,33 +4,42 @@ import Model.Model.*;
 
 public class RezygnacjaZWizyty {
 
-	private IModel model;
-	private int idTerminu;
-	private string[] powodyRezygnacji;
-	private int pacjentID;
+    private IModel model;
+    private int idTerminu;
+    private int pacjentID;
+    private String powodRezygnacji;
 
-	/**
-	 * 
-	 * @param idTerminu
-	 * @param pacjentID
-	 */
-	public bool procesRezygnacji(int idTerminu, int pacjentID) {
-		// TODO - implement RezygnacjaZWizyty.procesRezygnacji
-		throw new UnsupportedOperationException();
-	}
+    public RezygnacjaZWizyty(IModel model) {
+        this.model = model;
+    }
 
-	/**
-	 * 
-	 * @param powod
-	 */
-	public void dodajPowod(string powod) {
-		// TODO - implement RezygnacjaZWizyty.dodajPowod
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * rozpoczęcie procesu rezygnacji
+     *
+     * @param idTerminu
+     * @param pacjentID
+     * @return
+     */
+    public boolean procesRezygnacji(int idTerminu, int pacjentID) {
+        this.idTerminu = idTerminu;
+        this.pacjentID = pacjentID;
+        return true;
+    }
 
-	public void zatwierdzRezygnacje() {
-		// TODO - implement RezygnacjaZWizyty.zatwierdzRezygnacje
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * dodanie powodu rezygnacji
+     *
+     * @param powod
+     */
+    public void dodajPowod(String powod) {
+        this.powodRezygnacji = powod;
+    }
 
+    /**
+     * zatwierdzenie rezygnacji
+     */
+    public void zatwierdzRezygnacje() {
+        model.zapiszPowodRezygnacji(idTerminu, powodRezygnacji);
+        model.usunRezerwacjeZListyPacjenta(idTerminu, pacjentID);
+    }
 }

@@ -4,7 +4,7 @@ import Model.Model.*;
 
 public class KontrolerPacjenta implements IKontrolerPacjenta {
 
-	private IModel model;
+    private IModel model;
 
     public KontrolerPacjenta(IModel model) {
         this.model = model;
@@ -12,23 +12,23 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
 
     @Override
     public void przegladanieOferty() {
-
+        model.pobierzOferte();
     }
 
     @Override
     public void przegladanieWolnychTerminow() {
-
+        model.pobierzWolneTerminy();
     }
 
     @Override
     public void rezerwacjaWizyty() {
+
         RezerwacjaWizyty proces = new RezerwacjaWizyty(model);
 
-        proces.rozpoczecieRezerwacji(1);
-
+        int wybranyTerminId = 1; // przekazywane z Widoku
+        proces.rozpoczecieRezerwacji(wybranyTerminId);
 
         IDaneOsobowe dane = new DaneOsobowe();
-
         dane.setImie("Jan");
         dane.setNazwisko("Kowalski");
         dane.setPesel("90101055555");
@@ -41,15 +41,24 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
     @Override
     public void rezygnacjaZWizyty() {
 
+        RezygnacjaZWizyty proces = new RezygnacjaZWizyty(model);
+
+        int idRezerwacji = 1; // z Widoku
+        int pacjentId = 10;   // z Widoku
+
+        proces.procesRezygnacji(idRezerwacji, pacjentId);
     }
 
     @Override
     public void podanieDanychDoRezerwacji() {
-
+        // dane przekazywane z Widoku – logika w RezerwacjaWizyty
     }
 
     @Override
     public void podaniePrzyczynyRezygnacji() {
 
+        RezygnacjaZWizyty proces = new RezygnacjaZWizyty(model);
+        proces.dodajPowod("Nie mogę przyjść w tym terminie");
+        proces.zatwierdzRezygnacje();
     }
 }
