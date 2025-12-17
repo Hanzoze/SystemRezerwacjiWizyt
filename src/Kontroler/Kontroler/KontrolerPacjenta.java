@@ -1,60 +1,23 @@
-package Kontroler.Kontroler;
+@Override
+public void rezygnacjaZWizyty() {
 
-import Model.Model.*;
+    RezygnacjaZWizyty proces = new RezygnacjaZWizyty(model);
 
-public class KontrolerPacjenta implements IKontrolerPacjenta {
+    int idRezerwacji = 1; // testowe ID
+    int pacjentID = 100;
 
-	private IModel model;
+    proces.rozpocznijRezygnacje(idRezerwacji, pacjentID);
 
-    public KontrolerPacjenta(IModel model) {
-        this.model = model;
-    }
+    podaniePrzyczynyRezygnacji(proces);
 
-    @Override
-    public void przegladanieOferty() {
+    proces.zatwierdzRezygnacje();
+}
 
-    }
+@Override
+public void podaniePrzyczynyRezygnacji() {
+    // wersja bez parametrów – nieużywana
+}
 
-    @Override
-    public void przegladanieWolnychTerminow() {
-
-    }
-
-    @Override
-    public void rezerwacjaWizyty() {
-        RezerwacjaWizyty proces = new RezerwacjaWizyty(model);
-
-        proces.rozpoczecieRezerwacji(1);
-
-        try{
-            IDaneOsobowe dane = new DaneOsobowe();
-        } catch (SecurityException){
-        }
-
-
-        IDaneOsobowe dane = new DaneOsobowe();
-
-        dane.setImie("Jan");
-        dane.setNazwisko("Kowalski");
-        dane.setPesel("90101055555");
-        dane.setEmail("jan.kowalski@test.pl");
-        dane.setNumerTelefonu("500600700");
-
-        proces.pobierzDaneOsobowe(dane);
-    }
-
-    @Override
-    public void rezygnacjaZWizyty() {
-
-    }
-
-    @Override
-    public void podanieDanychDoRezerwacji() {
-
-    }
-
-    @Override
-    public void podaniePrzyczynyRezygnacji() {
-
-    }
+public void podaniePrzyczynyRezygnacji(RezygnacjaZWizyty proces) {
+    proces.podajPowod("Nie mogę przyjść z powodów zdrowotnych");
 }
