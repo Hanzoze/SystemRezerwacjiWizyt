@@ -6,33 +6,59 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
 
     private IModel model;
 
-    public void przeglądanieOferty() {
-        // TODO - implement KontrolerPacjenta.przeglądanieOferty
-        throw new UnsupportedOperationException();
+    public KontrolerPacjenta(IModel model) {
+        this.model = model;
     }
 
-    public void przeglądaniewolnychterminow() {
-        // TODO - implement KontrolerPacjenta.przeglądaniewolnychterminow
-        throw new UnsupportedOperationException();
+    @Override
+    public void przegladanieOferty() {
+        model.pobierzOferte();
     }
 
-    public void rezerwacjawizyty() {
-        // TODO - implement KontrolerPacjenta.rezerwacjawizyty
-        throw new UnsupportedOperationException();
+    @Override
+    public void przegladanieWolnychTerminow() {
+        model.pobierzWolneTerminy();
     }
 
-    public void rezygnacjazwizyty() {
-        // TODO - implement KontrolerPacjenta.rezygnacjazwizyty
-        throw new UnsupportedOperationException();
+    @Override
+    public void rezerwacjaWizyty() {
+
+        RezerwacjaWizyty proces = new RezerwacjaWizyty(model);
+
+        int wybranyTerminId = 1; // przekazywane z Widoku
+        proces.rozpoczecieRezerwacji(wybranyTerminId);
+
+        IDaneOsobowe dane = new DaneOsobowe();
+        dane.setImie("Jan");
+        dane.setNazwisko("Kowalski");
+        dane.setPesel("90101055555");
+        dane.setEmail("jan.kowalski@test.pl");
+        dane.setNumerTelefonu("500600700");
+
+        proces.pobierzDaneOsobowe(dane);
     }
 
-    public void podaniedanychdorezerwacji() {
-        // TODO - implement KontrolerPacjenta.podaniedanychdorezerwacji
-        throw new UnsupportedOperationException();
-    }
-    public void podanieprzyczynydorezegnacji () {
-        // TODO - implement KontrolerPacjenta.podanieprzyczynydorezegnacji
-        throw new UnsupportedOperationException();
+    @Override
+    public void rezygnacjaZWizyty() {
+
+        RezygnacjaZWizyty proces = new RezygnacjaZWizyty(model);
+
+        int idRezerwacji = 1; // z Widoku
+        int pacjentId = 10;   // z Widoku
+
+        proces.procesRezygnacji(idRezerwacji, pacjentId);
     }
 
+    @Override
+    public void podanieDanychDoRezerwacji() {
+        // dane przekazywane z Widoku – logika w RezerwacjaWizyty
+    }
+
+    @Override
+    public void podaniePrzyczynyRezygnacji() {
+
+        RezygnacjaZWizyty proces = new RezygnacjaZWizyty(model);
+        proces.dodajPowod("Nie mogę przyjść w tym terminie");
+        proces.zatwierdzRezygnacje();
+    }
 }
