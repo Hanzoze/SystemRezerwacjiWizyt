@@ -12,12 +12,10 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
 
     @Override
     public void przegladanieOferty() {
-        model.pobierzOferte();
     }
 
     @Override
     public void przegladanieWolnychTerminow() {
-        model.pobierzWolneTerminy();
     }
 
     @Override
