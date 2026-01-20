@@ -1,5 +1,7 @@
 package Kontroler.Kontroler;
 
+import Model.Model.IDaneOsobowe;
+
 public interface IKontrolerPacjenta {
 
 	void przegladanieOferty();
@@ -10,7 +12,7 @@ public interface IKontrolerPacjenta {
 
 	void rezygnacjaZWizyty();
 
-	void podanieDanychDoRezerwacji();
+	IDaneOsobowe podanieDanychDoRezerwacji(boolean wymaganeSkierowanie);
 
 	void podaniePrzyczynyRezygnacji();
 
