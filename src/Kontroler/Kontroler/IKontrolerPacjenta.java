@@ -12,7 +12,7 @@ public interface IKontrolerPacjenta {
 
 	void rezygnacjaZWizyty();
 
-	IDaneOsobowe podanieDanychDoRezerwacji();
+	IDaneOsobowe podanieDanychDoRezerwacji(boolean wymaganeSkierowanie);
 
 	void podaniePrzyczynyRezygnacji();
 

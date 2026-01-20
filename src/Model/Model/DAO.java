@@ -12,30 +12,7 @@ public class DAO implements IDAO {
     private Map<Integer, String> tabelaPowody = new HashMap<>();
 
     public DAO() {
-        stworzDaneTestowe();
-    }
 
-    private void stworzDaneTestowe() {
-        Termin t1 = new Termin();
-        t1.setIdTerminu(1);
-        t1.setData("2023-12-01 10:00");
-        t1.setLekarz("Dr House");
-        t1.setSpecjalizacja("Diagnosta");
-        t1.setGabinet(101);
-        t1.setStatus("WOLNY");
-        t1.setWymaganeSkierowanie(false);
-
-        Termin t2 = new Termin();
-        t2.setIdTerminu(2);
-        t2.setData("2023-12-01 11:00");
-        t2.setLekarz("Dr Quinn");
-        t2.setSpecjalizacja("Internista");
-        t2.setGabinet(102);
-        t2.setStatus("WOLNY");
-        t2.setWymaganeSkierowanie(true);
-
-        tabelaTerminy.add(t1);
-        tabelaTerminy.add(t2);
     }
 
     @Override

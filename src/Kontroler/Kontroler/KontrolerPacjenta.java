@@ -24,9 +24,16 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
         RezerwacjaWizyty proces = new RezerwacjaWizyty(model);
 
         int wybranyTerminId = 1;
-        proces.rozpoczecieRezerwacji(wybranyTerminId);
+        boolean czyWolny = proces.rozpoczecieRezerwacji(wybranyTerminId);
 
-        IDaneOsobowe dane = podanieDanychDoRezerwacji();
+        if (!czyWolny) {
+            System.out.println("BŁĄD: Wybrany termin jest już zajęty. Nie można kontynuować.");
+            return;
+        }
+
+        boolean czyTrzebaSkierowanie = model.czyWymagaSkierowanie(wybranyTerminId);
+
+        IDaneOsobowe dane = podanieDanychDoRezerwacji(czyTrzebaSkierowanie);
 
         proces.pobierzDaneOsobowe(dane);
     }
@@ -36,14 +43,14 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
 
         RezygnacjaZWizyty proces = new RezygnacjaZWizyty(model);
 
-        int idRezerwacji = 1; // z Widoku
-        int pacjentId = 10;   // z Widoku
+        int idRezerwacji = 1;
+        int pacjentId = 10;
 
         proces.procesRezygnacji(idRezerwacji, pacjentId);
     }
 
     @Override
-    public IDaneOsobowe podanieDanychDoRezerwacji() {
+    public IDaneOsobowe podanieDanychDoRezerwacji(boolean wymaganeSkierowanie) {
 
         IDaneOsobowe dane = new DaneOsobowe();
         dane.setImie("Jan");
@@ -52,7 +59,17 @@ public class KontrolerPacjenta implements IKontrolerPacjenta {
         dane.setEmail("jan.kowalski@test.pl");
         dane.setNumerTelefonu("500600700");
 
-        System.out.println("KONTROLER PACJENTA: Użytkownik wprowadził dane w formularzu.");
+        if (wymaganeSkierowanie) {
+            System.out.println("Ten termin wymaga skierowania.");
+
+            String kod = "SKIER-2023";
+            System.out.println(kod);
+
+            dane.setSkierowanie(kod);
+        } else {
+            System.out.println("(Skierowanie nie jest wymagane)");
+        }
+
         return dane;
     }
 

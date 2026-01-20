@@ -10,7 +10,6 @@ public class DaneOsobowe implements IDaneOsobowe {
     private String email;
     private String skierowanie;
 
-    // --- Gettery są OK, poprawiamy Settery ---
 
     @Override
     public String getImie() {

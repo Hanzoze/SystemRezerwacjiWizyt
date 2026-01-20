@@ -21,11 +21,13 @@ public class RezerwacjaWizyty {
     /**
      * rozpoczęcie rezerwacji
      */
-    public void rozpoczecieRezerwacji(int terminID) {
+    public boolean rozpoczecieRezerwacji(int terminID) {
         if (model.czyTerminWolny(terminID)) {
             this.wybranyTerminID = terminID;
+            return true;
         } else {
             this.wybranyTerminID = -1;
+            return false;
         }
     }
 
