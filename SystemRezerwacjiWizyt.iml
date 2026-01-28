@@ -76,5 +76,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="fitnesse-standalone" level="project" />
   </component>
 </module>
