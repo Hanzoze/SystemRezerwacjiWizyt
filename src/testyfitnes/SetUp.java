@@ -1,5 +1,6 @@
 package testyfitnes;
 
+import Model.Model.Termin;
 import fit.Fixture;
 import Model.Model.DAO;
 import Model.Model.Model;
@@ -22,6 +23,12 @@ public class SetUp extends Fixture {
         przygotujDanePoczatkowe();
 
         kontrolerPacjenta = new KontrolerPacjenta(model);
+
+        Termin t1 = new Termin(); t1.setIdTerminu(101); t1.setStatus("WOLNY");
+        dao.dodajTermin(t1);
+
+        Termin t2 = new Termin(); t2.setIdTerminu(102); t2.setStatus("WOLNY");
+        dao.dodajTermin(t2);
     }
 
     private void przygotujDanePoczatkowe() {
